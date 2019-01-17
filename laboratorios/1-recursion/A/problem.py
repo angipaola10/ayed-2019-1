@@ -1,9 +1,17 @@
 import json
 
-
+def reverse2(text,t):
+    if len (text) == 0:
+        return t
+    else:
+        t+=text[-1]
+        text = text[:-1]
+        return reverse2(text,t)
+    
 # TODO Complete!!
 def reverse(text):
-    return text
+    t = reverse2(text,'')
+    return t
 
 
 if __name__ == '__main__':

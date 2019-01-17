@@ -3,7 +3,14 @@ import json
 
 # TODO Complete!
 def compute_ways(n):
-    return 0
+    if n == 3:
+        return 4
+    elif n == 2:
+        return 2
+    elif n == 1:
+        return 1
+    else:
+        return compute_ways(n-1) + compute_ways(n-2) + compute_ways(n-3)
 
 
 if __name__ == '__main__':

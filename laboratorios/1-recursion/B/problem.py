@@ -1,9 +1,19 @@
 import json
 
+def parimpar(lista,cont,pares,impares):
+    if cont < len(lista):
+        if lista[cont] % 2 == 0:
+            pares.append(lista[cont])
+        else:
+            impares.append(lista[cont])
+        return parimpar(lista,cont+1,pares,impares)
+    else:
+        return pares+impares
 
 # TODO Complete!
 def arrange(numbers):
-    return numbers
+    number = parimpar(numbers,0,[],[])
+    return number
 
 
 if __name__ == '__main__':
