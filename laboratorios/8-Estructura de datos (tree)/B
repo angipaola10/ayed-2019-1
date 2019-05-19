@@ -1,0 +1,90 @@
+class TreeNode:
+    def __init__(self,value, left = None, right = None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+class Tree:
+    def __init__(self, root = None):
+        self.root = root
+
+    def agregar_elemento(self,value):
+        if self.root == None:
+            self.root = TreeNode(value)
+        else:
+            x = self.root
+            l = [x]
+            while True:
+                k = []
+                for i in l:
+                    if i.left  == None:
+                        i.left = TreeNode(value)
+                        k = []
+                        break
+                    elif i.right == None:
+                        i.right = TreeNode(value)
+                        k = []
+                        break
+                    else:
+                        k.append(i.left)
+                        k.append(i.right)
+                if k == []:
+                    break
+                else:
+                    l = k
+    def inorder(self,x = None):
+        if x is None:
+            x = self.root
+        if x.left is not None:
+            self.inorder(x.left)
+        print(x.value)
+        if x.right is not None:
+            self.inorder(x.right)
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+                    
+    
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def push(self, value):
+        new_node = Node(value)
+
+        if self.head is None:
+            self.head = new_node
+            return
+
+        current = self.head
+        while current.next is not None:
+            current = current.next
+
+        current.next = new_node
+
+    def NewTree(self):
+        tree = Tree(None)
+        curr = self.head
+        while curr is not None:
+            tree.agregar_elemento(curr.value)
+            curr = curr.next
+        return tree
+    
+    def print_all(self):
+        current = self.head
+        while current is not None:
+            print(current.value)
+            current = current.next
+        
+L = LinkedList()
+L.push(10)
+L.push(12)
+L.push(15)
+L.push(25)
+L.push(30)
+L.push(36)
+tree = L.NewTree()
+tree.inorder()
+
