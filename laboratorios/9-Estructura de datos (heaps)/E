@@ -1,0 +1,80 @@
+from sys import stdin
+import operator
+
+class TreeNode:
+    def __init__(self, value = [] ,  left = None , right = None):
+        self.value = value
+        self.left = left
+        self.right = right
+        
+class Tree:
+    def __init__(self, root = None):
+        self.root = root
+        
+    def inorder(self,x = None):
+        if x is None:
+            x = self.root
+        if x.left is not None:
+            self.inorder(x.left)
+        print(x.value)
+        if x.right is not None:
+            self.inorder(x.right)
+
+def main():
+    s = stdin.readline().strip()
+    t = stdin.readline().strip()
+    dic = {}
+    for i in range (len(s)):
+        if s.count(s[i]) not in dic:
+            dic[s.count(s[i])] = [s[i]]
+        else:
+            k = dic.get(s.count(s[i]))
+            if s[i] not in k:
+                k.append(s[i])
+            dic[s.count(s[i])] = k
+    r = []
+    while len(r) < 2:
+        k = min(dic)
+        lista = dic.get(k)
+        r.append(lista.pop())
+        if len(lista) > 0:
+            dic[k] = lista
+        else:
+            del(dic[k])
+    if s.count(r[1]) <= s.count(r[0]):
+        r.reverse()
+    NodeIzq = TreeNode([r[0],s.count(r[0])])
+    NodeDer = TreeNode([r[1],s.count(r[1])])
+    Padre = TreeNode([None,NodeIzq.value[1]+NodeDer.value[1]],NodeIzq,NodeDer)
+    while len(dic) > 0:
+        k = min(dic)
+        lista = dic.get(k)
+        if k < Padre.value[1]:
+            lista.reverse()
+            for i in lista:
+                NodeIzq = TreeNode([i,k])
+                NodeDer = Padre
+                Padre = TreeNode([None,NodeIzq.value[1]+NodeDer.value[1]],NodeIzq,NodeDer)
+                tree = Tree(Padre)
+            del(dic[k])
+        else:
+            temp = lista[0]
+            lista = lista[1:]
+            NodeIzq = Padre
+            NodeDer = TreeNode([temp,k])
+            Padre = TreeNode([None,NodeIzq.value[1]+NodeDer.value[1]],NodeIzq,NodeDer)
+            tree = Tree(Padre)
+            if len(lista) == 0:
+                del(dic[k])
+            dic[k] = lista
+    v = tree.root
+    string = ''
+    for i in range(len(t)):
+        if t[i] == '1':
+            v = v.right
+        else:
+            v = v.left
+        if v.value[0] is not None:
+            string+= v.value[0]
+            v = tree.root
+main()
