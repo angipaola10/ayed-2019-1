@@ -1,0 +1,19 @@
+from sys import stdin
+
+def main():
+    t = 0
+    lista = [int(x) for x in stdin.readline().strip().split()]
+    for i in range(len(lista)):
+        j = 2*i+1
+        k = 2*i+2
+        if j < len(lista) and lista[i] < lista[j] :
+            t = -1
+            break
+        if k < len(lista) and lista[i] < lista[k]:
+            t =- 1
+            break
+    if t == 0:
+        print(True)
+    else:
+        print(False) 
+main()
