@@ -1,0 +1,22 @@
+from sys import stdin
+from heapq import heappush, heappop
+
+def main():
+    n = int(stdin.readline().strip())
+    heap = []
+    for i in range(n):
+        heappush(heap,int(stdin.readline().strip()))
+        ordered = []
+        while heap:
+            ordered.append(heappop(heap))
+        for i in ordered:
+            heappush(heap,i)
+        if len(ordered) == 1:
+            print(float(ordered[0]))
+        elif len(ordered) % 2 == 1:
+            print(float(ordered[len(ordered)//2]))
+        else:
+            k = ordered[len(ordered)//2]+ ordered[len(ordered)//2 -1]
+            print(k/2)
+main()
+        
