@@ -1,0 +1,30 @@
+from sys import stdin
+from heapq import heappush, heappop
+
+def main():
+    heapA = [int(x) for x in stdin.readline().strip().split()]
+    heapB = [int(x) for x in stdin.readline().strip().split()]
+    k = int(stdin.readline().strip())
+    heapA.sort()
+    heapA.reverse()
+    heapB.sort()
+    heapB.reverse()
+    lista = []
+    MaxA = 0
+    MaxB = 0
+    for i in range(k):
+        if len(lista) == 0:
+            MaxA = heapA[0]
+            heapA = heapA[1:]
+            MaxB = heapB[0]
+            heapB = heapB[1:]
+            lista.append(MaxA+MaxB)
+        elif MaxA+heapB[0] > MaxB+heapA[0]:
+            lista.append(MaxA+heapB[0])
+            heapB= heapB[1:]
+        else:
+            lista.append(MaxB+heapA[0])
+            heapA= heapA[1:]
+    for i in lista:
+        print(i)
+main()
