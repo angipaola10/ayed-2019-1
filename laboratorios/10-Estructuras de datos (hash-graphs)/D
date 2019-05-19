@@ -1,0 +1,22 @@
+from sys import stdin
+
+def main():
+    n = int(stdin.readline().strip())
+    keys = []
+    for i in range(n):
+        string = stdin.readline().strip()
+        if i != 0:
+            if i not in keys:
+                keys = None
+                print(False)
+                break
+        if len(string) > 1:
+            temp = [int (x) for x in string.split()]
+            keys += temp
+        elif int(string) != -1:
+            keys.append(int(string))
+    if keys is not None:
+        print(True)
+main()
+        
+                
