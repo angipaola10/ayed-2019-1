@@ -1,0 +1,49 @@
+class Node:
+    def __init__(self,value,children = []):
+        self.value = value
+        self.children = children
+
+class Tree:
+    def __init__(self, root = None):
+        self.root = root
+        
+    def comparar (self, tree2):
+        x1 = self.root
+        x2 = tree2.root 
+        l1 = [x1]
+        l2 = [x2]
+        while True:
+            k = []
+            if len(l1) == len(l2):
+                for i in range (len(l1)):
+                    if l1[i].children != l2[i].children:
+                        k = None
+                        print('False')
+                        break
+                    k += l1[i].children
+            else:
+                Print('False')
+                break
+            if k== None:
+                break
+            if k == []:
+                print('True')
+                break
+            l1 = k
+            l2 = k
+
+                
+node_7 = Node(7)
+node_6 = Node(6)
+node_5 = Node(5)
+node_4 = Node(4)
+node_2 = Node(2, [node_7, node_6])
+node_3 = Node(3, [node_5, node_4])
+node_1 = Node(1, [node_2, node_3])
+
+tree1 = Tree(node_1)
+tree2 = Tree(node_1)
+tree1.comparar(tree2)
+
+
+
