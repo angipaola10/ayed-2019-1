@@ -1,0 +1,27 @@
+from sys import stdin    
+
+def main():
+    A = [int(x) for x in stdin.readline().strip().split()]
+    B = [int(x) for x in stdin.readline().strip().split()]
+    if len(B) > len(A):
+        temp = A
+        A = B
+        B = temp
+    for i in B:
+        A.append(i)
+        j = len(A)-1
+        while True:
+            if j%2 == 0:
+                j2 = (j-2)//2
+            else:
+                j2 = (j-1)//2
+            if j2 < 0:
+                break
+            elif A[j2] < i:
+                A[j] = A[j2]
+                A[j2] = i
+                j = j2
+            else:
+                break
+    print(*A)
+main()
