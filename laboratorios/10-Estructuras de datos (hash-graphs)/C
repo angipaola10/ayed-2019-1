@@ -1,0 +1,34 @@
+## La entrada finaliza con la linea '0 0'
+from sys import stdin
+
+def main():
+    n = int(stdin.readline().strip())
+    lista_adyacencia = {}
+    while True:
+        a , b = stdin.readline().split()
+        a , b = int(a) , int(b)
+        if a == 0 and b == 0:
+            break
+        if a in lista_adyacencia:
+            k = lista_adyacencia.get(a)
+            k.append(b)
+        else:
+            lista_adyacencia[a] = [b]
+        if b not in lista_adyacencia:
+            lista_adyacencia[b] = []
+    if [] in lista_adyacencia.values():
+        lista_adyacencia = lista_adyacencia.items()
+        lista_adyacencia = sorted(lista_adyacencia, key = lambda x: x[1])
+        k = lista_adyacencia[0][0]
+        lista_adyacencia = lista_adyacencia[1:]
+        for i in lista_adyacencia:
+            if k not in i[1]:
+                k = None
+                print(-1)
+                break
+        if k != None:
+            print(k)
+    else:
+        print(-1)
+        
+main()
