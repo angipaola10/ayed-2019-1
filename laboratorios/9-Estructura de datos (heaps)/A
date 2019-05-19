@@ -1,0 +1,22 @@
+from sys import stdin
+from heapq import heappush,heappop
+
+def main():
+    n , k = stdin.readline().split()
+    n , k = int(n) , int(k)
+    l = [int(x) for x in stdin.readline().strip().split()]
+    heap = []
+    for i in l:
+        heappush(heap,i)
+    x = heappop(heap)
+    cont = 0
+    while x < k and len(heap) > 0:
+        y = heappop(heap)
+        heappush(heap, x + 2*y)
+        x = heappop(heap)
+        cont+=1
+    if len(heap) > 0:
+        print(cont)
+    else:
+        print(-1)
+main()
