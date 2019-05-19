@@ -1,0 +1,42 @@
+class Node:
+    def __init__(self,value,children = []):
+        self.value = value
+        self.children = children
+
+class Tree:
+    def __init__(self, root = None):
+        self.root = root
+    def recorrer_espiral(self,x = None):
+        x = self.root
+        lista_total = [x.value] 
+        c = 2
+        l = [x]
+        while True:
+            k = []
+            for i in l:
+                for j in i.children:
+                    k.append(j)
+            if c == 2:
+                for p in k:
+                    lista_total.append(p.value)
+                c = 1
+            else:
+                for p in range(len(k)-1,-1,-1):
+                    lista_total.append(k[p].value)
+                c = 2
+            l = k
+            if k == []:
+                print(*lista_total)
+                break
+                
+                    
+node_7 = Node(7)
+node_6 = Node(6)
+node_5 = Node(5)
+node_4 = Node(4)
+node_2 = Node(2, [node_7 , node_6])
+node_3 = Node(3, [node_5, node_4])
+node_1 = Node(1, [node_2, node_3])
+
+tree = Tree(node_1)
+tree.recorrer_espiral()
