@@ -1,0 +1,33 @@
+from sys import stdin
+from heapq import heappush, heappop
+
+def TieusPizza(dic , heap , i0 , t0):
+    suma = t0
+    temp = t0
+    while len(heap) > 0:
+        k = heappop(heap)
+        for i in dic.get(k):
+            temp+= k
+            suma+= temp - i + i0
+    return suma
+            
+
+
+def main():
+    n = int(stdin.readline().strip())
+    i0 , t0 = stdin.readline().split()
+    i0 , t0 = int(i0) , int(t0)
+    dic = {}
+    heap =[]
+    for i in range(n-1):
+        i , t = stdin.readline().split()
+        i , t = int(i) , int(t)
+        if t not in dic:
+            dic[t] = [i]
+        else:
+            k = dic.get(t)
+            k.append(i)
+        if t not in heap:
+            heappush(heap,t)
+    print(TieusPizza(dic, heap, i0, t0)//n)
+main()            
